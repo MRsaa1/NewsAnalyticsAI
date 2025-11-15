@@ -1,0 +1,68 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+app.log
+server.log
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+signals.db
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Build outputs
+build/
+dist/
+*.egg-info/
+
+# Go specific (if using Go dashboard)
+*.exe
+*.dll
+*.so
+*.dylib
+
+# PM2
+.pm2/
+
+# Node modules (should not be committed)
+node_modules/
+

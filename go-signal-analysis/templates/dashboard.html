@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAA Alliance | News Analytics Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 20px 0;
+            border-bottom: 2px solid #ffd700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #cccccc;
+            margin-top: 5px;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            padding: 8px 16px;
+            background: #333;
+            border: 1px solid #555;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .lang-btn.active {
+            background: #ffd700;
+            color: #000;
+        }
+
+        .lang-btn:hover {
+            background: #555;
+        }
+
+        .filters {
+            background: #1a1a1a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .filter-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-group label {
+            color: #ffd700;
+            margin-bottom: 5px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .filter-group select,
+        .filter-group input {
+            padding: 8px 12px;
+            background: #333;
+            border: 1px solid #555;
+            color: #fff;
+            border-radius: 4px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #ffd700;
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background: #ffed4e;
+        }
+
+        .btn-secondary {
+            background: #333;
+            color: #fff;
+            border: 1px solid #555;
+        }
+
+        .btn-secondary:hover {
+            background: #555;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .stat-label {
+            color: #cccccc;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .signals-list {
+            margin-top: 20px;
+        }
+
+        .signal-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .signal-card:hover {
+            border-color: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        .signal-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .signal-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .meta-item {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .meta-sector {
+            background: #333;
+            color: #fff;
+        }
+
+        .meta-impact-high {
+            background: #dc3545;
+            color: #fff;
+        }
+
+        .meta-confidence {
+            background: #28a745;
+            color: #fff;
+        }
+
+        .sentiment-bull {
+            background: #28a745;
+            color: #fff;
+        }
+
+        .sentiment-bear {
+            background: #dc3545;
+            color: #fff;
+        }
+
+        .sentiment-neutral {
+            background: #6c757d;
+            color: #fff;
+        }
+
+        .signal-summary {
+            color: #cccccc;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .analysis-btn {
+            background: #ffd700;
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .analysis-btn:hover {
+            background: #ffed4e;
+        }
+
+        .analysis-content {
+            margin-top: 15px;
+            padding: 15px;
+            background: #2a2a2a;
+            border-radius: 6px;
+            border-left: 4px solid #ffd700;
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #cccccc;
+        }
+
+        .error {
+            color: #dc3545;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <div class="logo">{{if eq .Language "ru"}}SAA Alliance | Аналитический портал новостей{{else}}SAA Alliance | News Analytics Portal{{end}}</div>
+                    <div class="subtitle">{{if eq .Language "ru"}}Профессиональная аналитическая система{{else}}Professional Analytics System{{end}}</div>
+                </div>
+                <div class="lang-switch">
+                    <a href="/dashboard?lang=en" class="lang-btn {{if eq .Language "en"}}active{{end}}">EN</a>
+                    <a href="/dashboard?lang=ru" class="lang-btn {{if eq .Language "ru"}}active{{end}}">RU</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="filters">
+            <form method="GET" action="/dashboard">
+                <input type="hidden" name="lang" value="{{.Language}}">
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label>{{if eq .Language "ru"}}Сектор{{else}}Sector{{end}}</label>
+                        <select name="sector">
+                            <option value="">{{if eq .Language "ru"}}Все секторы{{else}}All Sectors{{end}}</option>
+                            <option value="CRYPTO" {{if eq .Filters.Sector "CRYPTO"}}selected{{end}}>Crypto</option>
+                            <option value="TECHNOLOGY" {{if eq .Filters.Sector "TECHNOLOGY"}}selected{{end}}>Technology</option>
+                            <option value="FINTECH" {{if eq .Filters.Sector "FINTECH"}}selected{{end}}>Fintech</option>
+                            <option value="ENERGY" {{if eq .Filters.Sector "ENERGY"}}selected{{end}}>Energy</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Region</label>
+                        <select name="region">
+                            <option value="">All Regions</option>
+                            <option value="US" {{if eq .Filters.Region "US"}}selected{{end}}>US</option>
+                            <option value="EU" {{if eq .Filters.Region "EU"}}selected{{end}}>EU</option>
+                            <option value="CN" {{if eq .Filters.Region "CN"}}selected{{end}}>China</option>
+                            <option value="UK" {{if eq .Filters.Region "UK"}}selected{{end}}>UK</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Min Impact</label>
+                        <select name="impact">
+                            <option value="0" {{if eq .Filters.Impact 0}}selected{{end}}>All</option>
+                            <option value="70" {{if eq .Filters.Impact 70}}selected{{end}}>70+</option>
+                            <option value="80" {{if eq .Filters.Impact 80}}selected{{end}}>80+</option>
+                            <option value="90" {{if eq .Filters.Impact 90}}selected{{end}}>90+</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Min Confidence</label>
+                        <select name="confidence">
+                            <option value="0" {{if eq .Filters.Confidence 0}}selected{{end}}>All</option>
+                            <option value="70" {{if eq .Filters.Confidence 70}}selected{{end}}>70%+</option>
+                            <option value="80" {{if eq .Filters.Confidence 80}}selected{{end}}>80%+</option>
+                            <option value="90" {{if eq .Filters.Confidence 90}}selected{{end}}>90%+</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button type="submit" class="btn btn-primary">🔍 LOAD SIGNALS</button>
+                    <a href="/telegram-preview" class="btn btn-secondary">📱 TELEGRAM DIGEST</a>
+                    <a href="/export" class="btn btn-secondary">📊 EXPORT DATA</a>
+                </div>
+            </form>
+        </div>
+
+        {{if .Stats}}
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">{{.Stats.Total}}</div>
+                <div class="stat-label">TOTAL SIGNALS</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">{{.Stats.HighImpact}}</div>
+                <div class="stat-label">HIGH IMPACT (70+)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">{{.Stats.MediumImpact}}</div>
+                <div class="stat-label">MEDIUM IMPACT</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">{{printf "%.0f" .Stats.AvgConfidence}}%</div>
+                <div class="stat-label">AVG. RELIABILITY</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">{{.Stats.Bullish}}</div>
+                <div class="stat-label">BULLISH SIGNALS</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">{{.Stats.Bearish}}</div>
+                <div class="stat-label">BEARISH SIGNALS</div>
+            </div>
+        </div>
+        {{end}}
+
+        <div class="signals-list">
+            {{if .Signals}}
+                {{range .Signals}}
+                <div class="signal-card">
+                    <div class="signal-title">{{.Title}}</div>
+                    <div class="signal-meta">
+                        <span class="meta-item meta-sector">{{.Sector}}</span>
+                        <span class="meta-item meta-sector">{{.Region}}</span>
+                        <span class="meta-item {{if ge .Impact 70}}meta-impact-high{{else}}meta-sector{{end}}">Impact: {{.Impact}}</span>
+                        <span class="meta-item meta-confidence">Confidence: {{.Confidence}}%</span>
+                        <span class="meta-item {{if gt .Sentiment 0}}sentiment-bull{{else if lt .Sentiment 0}}sentiment-bear{{else}}sentiment-neutral{{end}}">
+                            {{if gt .Sentiment 0}}📈 Bullish{{else if lt .Sentiment 0}}📉 Bearish{{else}}➡️ Neutral{{end}}
+                        </span>
+                        <span class="meta-item meta-sector">{{.SourceDomain}}</span>
+                    </div>
+                    <div style="margin-top: 15px; text-align: left;">
+                        <a href="/generate-analysis/{{.ID}}?lang={{$.Language}}" class="analysis-btn">
+                            {{if eq $.Language "ru"}}📊 SAA Alliance Аналитика{{else}}📊 SAA Alliance Analytics{{end}}
+                        </a>
+                    </div>
+                </div>
+                {{end}}
+            {{else}}
+                <div class="loading">
+                    📊 Select filtering parameters above and click '🔍 LOAD SIGNALS'
+                </div>
+            {{end}}
+        </div>
+    </div>
+</body>
+</html>
