@@ -10,7 +10,7 @@
 
 ## 📋 Overview
 
-**News Analytics AI (Signal Analysis)** is a professional analytical platform for analyzing financial news and creating investment signals. The system automatically collects news from RSS feeds, analyzes them using AI (GPT-4, DeepSeek), determines market and sector impact, and provides a Bloomberg Terminal-style visual interface.
+**News Analytics AI (Signal Analysis)** is a professional analytical platform for analyzing financial news and creating investment signals. The system automatically collects news from RSS feeds, analyzes them using AI (GPT-4, DeepSeek), determines market and sector impact, and provides a Terminal-style visual interface.
 
 ### Key Features
 
@@ -62,7 +62,7 @@ RSS Feeds → Python Backend (18080) → SQLite → Nginx → Web Browser
 
 - **TypeScript/React** - Modern component-based UI (`src/components/`)
 - **i18n System** - Full RU/EN localization with React Context
-- **HTML5 + CSS3** - Bloomberg Terminal-style design
+- **HTML5 + CSS3**
 - **Go Templates** - Server-side rendered dashboard
 
 ---
