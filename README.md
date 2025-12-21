@@ -1,6 +1,6 @@
 # News Analytics AI (Signal Analysis)
 
-**Professional Financial News Analysis Platform | Bloomberg Terminal Style**
+**Professional Financial News Analysis Platform**
 
 [![Live Demo](https://img.shields.io/badge/Demo-Live-brightgreen)](https://news.saa-alliance.com)
 [![Tech Stack](https://img.shields.io/badge/Stack-Python%20%2B%20Go-blue)](./app.py)
@@ -14,7 +14,7 @@
 
 ### Key Features
 
-- **Bloomberg-style UI** - Professional design with dark theme and gold accents
+- Professional design with dark theme and gold accents
 - **AI Analysis** - Integration with NVIDIA API (DeepSeek R1 Reasoning Model)
 - **20+ Sectors** - From cryptocurrencies to biotech and energy
 - **Multi-Language** - Full support for Russian and English
@@ -87,7 +87,6 @@ RSS Feeds → Python Backend (18080) → SQLite → Nginx → Web Browser
    - Deep market impact analysis
 
 3. **Dashboard**
-   - Bloomberg-style design
    - Filters by all parameters
    - Real-time statistics
    - Detailed view of each news item
